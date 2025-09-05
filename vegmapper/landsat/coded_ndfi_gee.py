@@ -116,9 +116,9 @@ def export_landsat_ndfi(proj_dir, sitename, tiles, res, year, sma_endmembers=Non
                 raise Exception('Currently only exporting to Google Storage (gs://).')
             task = ee.batch.Export.image.toCloudStorage(
                 bucket=gs.bucket,
-                fileNamePrefix=f'{gs.prefix}/{f'landsat_coded_distFlag_{sitename}_{year}_h{h}v{v}'}',
+                fileNamePrefix=f'{gs.prefix}/landsat_ndfi_{sitename}_{year}_h{h}v{v}',
                 image=ndfiMosaic,
-                description=f'landsat_coded_distFlag_{sitename}_{year}_h{h}v{v}',
+                description=f'landsat_ndfi_{sitename}_{year}_h{h}v{v}',
                 dimensions=f'{xdim}x{ydim}',
                 maxPixels=1e9,
                 crs=f'EPSG:{epsg}',
@@ -127,7 +127,7 @@ def export_landsat_ndfi(proj_dir, sitename, tiles, res, year, sma_endmembers=Non
         else:
             task = ee.batch.Export.image.toDrive(
                 image=ndfiMosaic,
-                description=f'landsat_coded_distFlag_{sitename}_{year}_h{h}v{v}',
+                description=f'landsat_ndfi_{sitename}_{year}_h{h}v{v}',
                 dimensions=f'{xdim}x{ydim}',
                 maxPixels=1e9,
                 crs=f'EPSG:{epsg}',
